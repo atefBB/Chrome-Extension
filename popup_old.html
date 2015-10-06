@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”>
+<html xmlns=”http://www.w3.org/1999/xhtml”>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
+
+<title>Itay Is a Fox trying to be a lion</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script type="text/javascript" src="inc/js/jquery-1.9.1.js"></script>
+<SCRIPT type="text/javascript">
+function ItayFlipText(input_text){
+	//alert(input_text)
+	var len = input_text.length; 
+	var nTest = "";
+	//alert(isHebrew(input_text))
+	if (! isHebrew(input_text))
+	{
+		nTest = input_text;
+	}
+	else 
+	{
+		for ( var i=0 ; i<len ; ++i) 
+		{
+			var c = input_text.charAt(i);
+			nTest = c + nTest;
+		}	
+	}	
+	//alert(nTest);
+	return nTest ;
+}
+			
+
+function isHebrew(input_text){
+	var Heb = false;
+	var len = input_text.length;
+	for ( var i=0 ; i<len ; ++i) {
+		var c = input_text.charAt(i);
+		if ((c >= 'א') && (c <= 'ת'))
+			Heb = true;
+		if (Heb)
+			break;}
+	return Heb;}
+
+function cutEndSpace(line){
+	var c = line.charAt(0);
+	// if (c == ' ')
+	//	return line.substr(1);
+	// else
+		return line;
+}
+
+function ItayStartFlip()
+{ // function ItayStartFlip starts
+	var newval="" ;
+	var newline="" ;
+	var lastLine='';
+	var nTest = "";
+	
+	var val = document.f.a.value;
+	
+	var len=val.length;
+	for ( var i=0 ; i<len; ++i) 
+	{ // loop through inputed text starts
+		var c=val.charAt(i);
+		var c0=val.charAt(i+1) ;
+		//console.log('c: ' + c + ' c0: ' + c0);
+		if ( (c=='\r' && c0=='\n')) 
+		{ // if 1st and 2nd character is blank check starts
+			alert(1)
+			if ( newval.length==0 )
+				newval = ItayFlipText(nTest) + newline;
+			else
+				if (lastLine.length == 0)
+					newval = newval + "\r\n" + ItayFlipText(nTest) + newline;
+				else
+					newval = newval + "\r\n" + ItayFlipText(nTest) + cutEndSpace(newline);
+			lastLine = ItayFlipText(nTest) + newline;
+			newline="" ;
+			nTest = "";
+			++i;
+		} // if 1st and 2nd character is blank check ends
+		else 
+		{ // else to  check 1st and 2nd character is not blank starts
+			if (c != ' ') // if to check first character is not blank starts
+				nTest = nTest + c;
+			else 
+			{ // if to check first character is  blank starts
+				newline = ' ' + ItayFlipText(nTest) + newline;
+				nTest = "";
+			} // if to check first character is  blank ends
+		} // else to  check 1st and 2nd character is not blank ends
+	} // loop through inputed text ends
+	if ( newval.length==0 ) // IF to check newval length is 0 (means empty) starts
+		newval = ItayFlipText(nTest) + newline;
+	else  // IF to check newval length is 0 (means empty) starts
+	{ // else to check  newval length is NOT 0 (means filled) starts
+		if (lastLine.length == 0)
+			newval = newval + "\r\n" + ItayFlipText(nTest) + newline;
+		else
+			newval = newval + "\r\n" + ItayFlipText(nTest) + cutEndSpace(newline);
+	} // else to check  newval length is NOT 0 (means filled) ends
+	//alert('--'+newval+'--');
+	$('#a').val(newval);
+	        //document.f.a.value=newval;
+} // function ItayStartFlip ends
+
+	        //document.f.a.value=newval;
+			//$('#a').val() =newval;
+			
+</SCRIPT>
+
+</head>
+
+<body>
+
+<video width: 669px; autoplay loop poster="polina.jpg" id="bgvid" style="
+    width: 669px;
+">
+    <source src="vid/foter.webm" type="video/webm">
+    <source src="vid/footer.mp4" type="video/mp4">
+   
+</video>
+			<div class="textcenters">
+ <h1 class="maintext"> המר לעברית הפוכה</h1>
+ <p class="pmaintext"> דוגמא: תפוז = זופת</p>
+		</div>
+
+
+<FORM name="f" ID="Form1" onSubmit="alert(1)">
+
+<TEXTAREA dir="rtl" name="a" rows="3" cols="63" ID="a"></TEXTAREA><BR>
+
+
+<button id="button2" onClick="javascript:ItayStartFlip();return false;" value="הפוך"> My Website</button>
+</FORM>
+<br>
+ 
+
+<br />
+
+
+   
+	
+
+
+<div align=”left”><span style="color:#fff;">Developed by Itayh</span></div>
+
+
+</body>
+</html>
